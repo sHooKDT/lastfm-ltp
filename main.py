@@ -19,12 +19,16 @@ PATTERN_NOMUSIC = "No music now..."
 
 FILE_PATH = "current_track.txt"
 
+# Set time in secs between requests
+UPDATE_INTERVAL = 10
+
 # Generate url
 req_url = api_url + api_method + "&api_key=" + api_key + api_other_parms
 
 def update_response(url):
-	print(req_url)
 	f = urllib.request.urlopen(url)
+	if f:
+		print("Request ok.")
 	return json.loads(f.read().decode('utf-8'))
 
 def update_track(api_response):
@@ -40,16 +44,15 @@ def update_track(api_response):
 
 def update_file(path, ptrn_music, ptrn_nomusic, track_inf):
 	with open(path, "w", encoding="utf-8") as file:
-		print(track_inf['now'])
 		if track_inf['now']:
 			file.write(ptrn_music.format(**track_inf))
 		else:
 			file.write(ptrn_nomusic.format(**track_inf))
 
-def start_upd(filepath, ptrn_music, ptrn_nomusic, url):
+def start_upd(filepath, ptrn_music, ptrn_nomusic, url, upd_int):
 	while(True):
 		track_inf = update_track(update_response(url))
 		update_file(filepath, ptrn_music, ptrn_nomusic, track_inf)
-		sleep(10)
+		sleep(upd_int)
 
-start_upd(FILE_PATH, PATTERN_NOWPLAYING, PATTERN_NOMUSIC, req_url)
+start_upd(FILE_PATH, PATTERN_NOWPLAYING, PATTERN_NOMUSIC, req_url, UPDATE_INTERVAL)
