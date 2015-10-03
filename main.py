@@ -5,8 +5,8 @@ from time import sleep
 # Api settings
 api_url = "http://ws.audioscrobbler.com/2.0/?method="
 api_method = "user.getRecentTracks"
-api_key = "e38cc7822bd7476fe4083e36ee69748e"
-api_other_parms = "&user=sHooKDT&format=json"
+api_key = "YOUR API KEY HERE"
+api_other_parms = "&user=" + "YOUR USERNAME ON LASTFM HERE" + "&format=json"
 
 PATTERN_NOWPLAYING = "Now playing: {artist} - {name}"
 # Make the pattern using this keys:
