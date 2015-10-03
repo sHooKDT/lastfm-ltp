@@ -1,0 +1,17 @@
+{
+	"api":{
+		"url":"http://ws.audioscrobbler.com/2.0/?method=",
+		"key":"YOUR_API_KEY_HERE",
+		"method":"user.getRecentTracks",
+		"parms":"&user=USERNAME_HERE&format=json"
+	},
+	"patterns":{
+		// {artist}, {name}, {album} are vailable
+		"playing":"Now playing: {artist} - {name}",
+		"nomusic":"No music now..."
+	},
+	"options":{
+		"file_path":"PATH_TO_TARGET_FILE",
+		"update_interval":10
+	}
+}
